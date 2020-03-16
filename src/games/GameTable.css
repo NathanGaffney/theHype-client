@@ -1,0 +1,13 @@
+.table-wrapper {
+    border-radius: 3px 3px 3px 3px;
+    height: 75vh;
+    overflow-wrap: break-word;
+    overflow: auto;
+}
+
+.desc-wrap{
+    overflow-wrap: break-word;
+    overflow: auto;
+
+
+}

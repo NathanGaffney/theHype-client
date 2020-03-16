@@ -1,0 +1,14 @@
+.description {
+    height: 8em;
+    overflow-wrap: break-word;
+    overflow: auto;
+}
+
+.CardImg {
+    height: 50%;
+}
+
+.card-wrapper {
+    height: 80vh;
+    overflow-y: hidden;
+}
