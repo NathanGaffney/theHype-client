@@ -19,7 +19,7 @@ const GameSearch = (props) => {
             method: 'POST',
             body: `search "${searchTitle}"; fields name, first_release_date, cover, summary, age_ratings;`,
             headers: new Headers({
-                'user-key': process.env.REACT_APP_IGDB_API_KEY,
+                'user-key': '7a26e72ddf83cf4cafcc3ce3b1127322',
                 'Content-Type': 'application/json'
             })
         }).then((res) => res.json())
@@ -37,7 +37,7 @@ const GameSearch = (props) => {
             method: 'POST',
             body: `where id = ${id}; fields url;`,
             headers: new Headers({
-                'user-key': process.env.REACT_APP_IGDB_API_KEY,
+                'user-key': '7a26e72ddf83cf4cafcc3ce3b1127322',
                 'Content-Type': 'application/json'
             })
         }).then((res) => res.json())
@@ -52,7 +52,7 @@ const GameSearch = (props) => {
             method: 'POST',
             body: `where id = ${ratingId}; fields rating;`,
             headers: new Headers({
-                'user-key': process.env.REACT_APP_IGDB_API_KEY,
+                'user-key': '7a26e72ddf83cf4cafcc3ce3b1127322',
                 'Content-Type': 'application/json'
             })
         }).then((res) => res.json())
