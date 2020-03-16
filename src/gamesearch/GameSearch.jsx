@@ -11,6 +11,7 @@ const GameSearch = (props) => {
     const [coverUrl, setCoverUrl] = useState('');
     const [ratingUrl, setRatingUrl] = useState('');
 
+    console.log(process.env.REACT_APP_IGDB_API_KEY)
 
     //fetchSearch grabs the game to be placed in the card
     const fetchSearch = () => {
