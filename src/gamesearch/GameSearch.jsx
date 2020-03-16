@@ -15,7 +15,7 @@ const GameSearch = (props) => {
 
     //fetchSearch grabs the game to be placed in the card
     const fetchSearch = () => {
-        fetch('https://api-v3.igdb.com/games', {
+        fetch('https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games', {
             method: 'POST',
             body: `search "${searchTitle}"; fields name, first_release_date, cover, summary, age_ratings;`,
             headers: new Headers({
@@ -33,7 +33,7 @@ const GameSearch = (props) => {
 
     //fetchCover grabs the box art url to be displayed in the card
     const fetchCover = (id) => {
-        fetch('https://api-v3.igdb.com/covers', {
+        fetch('https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/covers', {
             method: 'POST',
             body: `where id = ${id}; fields url;`,
             headers: new Headers({
@@ -48,7 +48,7 @@ const GameSearch = (props) => {
 
     //fetchRatings grabs the rating integer
     const fetchRatings = (ratingId) => {
-        fetch('https://api-v3.igdb.com/age_ratings', {
+        fetch('https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/age_ratings', {
             method: 'POST',
             body: `where id = ${ratingId}; fields rating;`,
             headers: new Headers({
