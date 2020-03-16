@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import APIURL from '../helpers/environment';
 
 const GameCreate = (props) => {
     const [title, setTitle] = useState('');
@@ -11,7 +12,7 @@ const GameCreate = (props) => {
     // this creates a manual entry game for the user
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/game/create', {
+        fetch(`${APIURL}/game/create`, {
             method: 'POST',
             body: JSON.stringify({ title: title, hypeRating: hypeRating, description: description, releaseDate: releaseDate, platform: platform }),
             headers: new Headers({
