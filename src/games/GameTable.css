@@ -11,3 +11,8 @@
 
 
 }
+
+td {
+    width: 150px;
+    word-wrap: break-word;
+}
