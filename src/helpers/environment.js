@@ -7,4 +7,7 @@ switch(window.location.hostname) {
         APIURL = 'http://localhost:3001';
         break;
     case 'ng-thehypetrain.herokuapp.com':
+        APIURL = 'https://git.heroku.com/ng-the-hype-train.git'
 }
+
+export default APIURL;

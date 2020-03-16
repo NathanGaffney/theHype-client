@@ -6,6 +6,7 @@ import {
 import TimeConversion from './TimeConversion';
 // import CoverGrab from './CoverGrab';
 import './GameSearchDisplay.css';
+import APIURL from '../helpers/environment';
 
 
 const GameSearchDisplay = (props) => {
@@ -18,7 +19,7 @@ const GameSearchDisplay = (props) => {
     const handleSubmit = () => {
 
         //this adds a searched game card to your database
-        fetch('http://localhost:3001/game/create', {
+        fetch(`${APIURL}/game/create`, {
             method: 'POST',
             body: JSON.stringify({ 
                 title: title, 

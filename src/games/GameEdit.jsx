@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import APIURL from '../helpers/environment';
 
 const GameEdit = (props) => {
 
@@ -12,7 +13,7 @@ const GameEdit = (props) => {
     // this is for editing the users game listing
     const gameUpdate = (event, game) => {
         event.preventDefault();
-        fetch(`http://localhost:3001/game/update/${props.gameToUpdate.id}`, {
+        fetch(`${APIURL}/game/update/${props.gameToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 title: editTitle,

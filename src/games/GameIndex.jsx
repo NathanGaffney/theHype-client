@@ -4,6 +4,7 @@ import GameCreate from './GameCreate';
 import GameTable from './GameTable';
 import GameEdit from './GameEdit';
 import GameSearch from '../gamesearch/GameSearch';
+import APIURL from '../helpers/environment';
 
 const GameIndex = (props) => {
 
@@ -19,7 +20,7 @@ const GameIndex = (props) => {
 
     // grabs users games
     const fetchGames = () => {
-        fetch('http://localhost:3001/game/allgames', {
+        fetch(`${APIURL}/game/allgames`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ const GameIndex = (props) => {
 
     // grabs all databases games
     const fetchCommunityGames = () => {
-        fetch('http://localhost:3001/game/community', {
+        fetch(`${APIURL}/game/community`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

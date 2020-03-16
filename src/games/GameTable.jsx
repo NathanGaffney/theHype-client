@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Table, Button } from 'reactstrap';
 import './GameTable.css';
+import APIURL from '../helpers/environment';
 
 // for deleting user games
 const GameTable = (props) => {
     const deleteGame = (game) => {
-        fetch(`http://localhost:3001/game/remove/${game.id}`, {
+        fetch(`${APIURL}/game/remove/${game.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -17,7 +18,7 @@ const GameTable = (props) => {
 
     // this adds a game from the community to the users list
     const handleSubmit = (comGame) => {
-        fetch('http://localhost:3001/game/create', {
+        fetch(`${APIURL}/game/create`, {
             method: 'POST',
             body: JSON.stringify(comGame),
             headers: new Headers({
