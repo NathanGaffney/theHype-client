@@ -4,11 +4,10 @@
     overflow: auto;
 }
 
-.CardImg {
+/* .CardImg {
     height: 50%;
-}
+} */
 
-.card-wrapper {
-    height: 80vh;
-    overflow-y: hidden;
-}
+/* .Card {
+width: 6em;
+} */

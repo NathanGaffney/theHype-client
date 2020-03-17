@@ -7,12 +7,6 @@
 
 .desc-wrap{
     overflow-wrap: break-word;
+    /* overflow: auto; */
     overflow: auto;
-
-
-}
-
-td {
-    width: 150px;
-    word-wrap: break-word;
 }
