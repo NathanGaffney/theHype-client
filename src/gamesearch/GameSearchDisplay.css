@@ -1,13 +1,42 @@
+/*this houses the game description on the card*/
 .description {
-    height: 8em;
+    margin-top: 1em;
+    max-height: 54%;
     overflow-wrap: break-word;
     overflow: auto;
 }
 
-/* .CardImg {
-    height: 50%;
-} */
+
+.card-body {
+    height: 2em;
+}
 
 /* .Card {
 width: 6em;
 } */
+
+/*this is the img tag*/
+.card-img{
+    height: 15em;
+}
+
+/*this wraps each card*/
+.card-wrapper{
+    margin: .9em;
+    /* box-shadow: grey 0 3px 10px 0.5px; */
+}
+
+/*this contains the other parts of the card, not including the button*/
+.card-body{
+    height: 18em;
+    width: 20em;
+    background-color: rgba(178, 223, 236, 0.212);
+    
+    
+}
+
+/*this wraps just the date on the card*/
+.release-date{
+    margin-top: .3em;
+}
+

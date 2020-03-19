@@ -8,12 +8,19 @@ import GameSearchDisplay from './GameSearchDisplay';
 const GameSearch = (props) => {
     const [searchGame, setSearchGame] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
+    
+
+
+    //closes the search modal
+    const closeSearchBox = () => { props.searchBoxOff() }
+    const openSearchBox = () => { props.searchBoxOn() }
+
 
     //fetchSearch grabs the game to be placed in the card
     const fetchSearch = () => {
         fetch('https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games', {
             method: 'POST',
-            body: `search "${searchTitle}"; fields name, first_release_date, cover, summary, age_ratings;`,
+            body: `search "${searchTitle}"; fields name,first_release_date, cover, summary, age_ratings;`,
             headers: new Headers({
                 'user-key': process.env.REACT_APP_IGDB_API_KEY,
                 'Content-Type': 'application/json'
@@ -22,24 +29,27 @@ const GameSearch = (props) => {
             .then((searchData) => {
                 console.log('searchData', searchData)
                 setSearchGame(searchData)
+                closeSearchBox()
             }).catch(err => console.log(err))
     }
 
-    //closes the search modal
-    const closeSearchBox = () => { props.searchBoxOff() }
-    const openSearchBox = () => { props.searchBoxOn() }
+    //here is where we map the search results that were set to searchGame
     let cards = null;
-    if(searchGame.length > 0){
-        cards = searchGame.map((item, index)=>{
-            return <GameSearchDisplay token={props.token} key={`game-card-${index}`} openSearchBox={openSearchBox} closeSearchBox={closeSearchBox()} searchGame={item} setSearchGame={setSearchGame} />
+    if (searchGame.length > 0) {
+        cards = searchGame.map((item, index) => {
+            //this item.cover will further filter our data to only map and send to fetch the cover if there is one to save on 3rd party api fetches and also help save on memory
+            if (item.cover) {
+                return <GameSearchDisplay token={props.token} key={`game-card-${index}`} search={props.search} setSearch={props.setSearch} closeSearchBox={closeSearchBox()} searchGame={item} setSearchGame={setSearchGame} />
+            }
         });
     }
 
     return (
         <>
-            <h3>Search</h3>
+            {/* <Row><h3>Search</h3></Row> */}
+            
             {props.searchBox ? <Modal isOpen={true}>
-                <ModalHeader toggle={() => closeSearchBox()}>What Game are you looking for?</ModalHeader>
+                <ModalHeader toggle={() => props.searchBoxOff()}>What Game are you looking for?</ModalHeader>
                 <ModalBody>
                     <Row>
                         <Col md='8'>

@@ -32,14 +32,9 @@ const GameEdit = (props) => {
         })
     }
 
-    // this is for closing the edit modal
-    const closeModal = () => {
-        props.updateOff();
-    }
-
     return (
         <Modal isOpen={true}>
-            <ModalHeader toggle={() => closeModal()}>Edit Game</ModalHeader>
+            <ModalHeader toggle={() => props.updateOff()}>Edit Game</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={gameUpdate}>
                     <FormGroup>
@@ -49,16 +44,16 @@ const GameEdit = (props) => {
                     <FormGroup>
                         <Label htmlFor='hypeRating'>Edit Hype Rating</Label>
                         <Input type='select' name='hypeRating' value={editHypeRating} onChange={(e) => setEditHypeRating(e.target.value)}>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
+                            <option value='1'>1 - Meh..</option>
+                            <option value='2'>2 - Okay</option>
+                            <option value='3'>3 - Looks fun</option>
+                            <option value='4'>4 - Can't wait</option>
+                            <option value='5'>5 - LETS GOOOO</option>
                         </Input>
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor='description'>Edit Description</Label>
-                        <Input name='description' value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
+                        <Input type='textarea' rows='4' name='description' value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor='releaseDate'>Change Release Date</Label>

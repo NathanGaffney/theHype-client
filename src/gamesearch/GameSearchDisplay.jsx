@@ -3,11 +3,11 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap'
-import TimeConversion from './TimeConversion';
-// import CoverGrab from './CoverGrab';
 import './GameSearchDisplay.css';
 import APIURL from '../helpers/environment';
 import { timeConverter } from './TimeConversion';
+import { countDown } from './TimeConversion';
+import SearchHype from './SearchHype';
 
 
 const GameSearchDisplay = (props) => {
@@ -18,30 +18,15 @@ const GameSearchDisplay = (props) => {
     const [coverUrl, setCoverUrl] = useState('');
     const [ratingUrl, setRatingUrl] = useState('');
     const [searchPlatforms, setSearchPlatforms] = useState([])
+    const [card, setCard] = useState(true)
     // const [platform, setPlatform] = useState('choose');
-    
-    const handleSubmit = () => {
+    // console.log('This should only send our results with covers', props.searchGame)
 
-        //this adds a searched game card to your database
-        fetch(`${APIURL}/game/create`, {
-            method: 'POST',
-            body: JSON.stringify({ 
-                title: props.searchGame.name, 
-                hypeRating: hypeRating, 
-                description: props.searchGame.summary, 
-                releaseDate: timeConverter(releaseDate), 
-                platform: 'choose' }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': props.token
-            })
-        }).then((res) => res.json())
-            .then((gameData) => {
-                console.log('THIS RAN', gameData);
-                // props.setSearchGame([])
-                alert('Game Added')
-            }).catch(err => console.log(err))
-    }
+    const [hypeBox, setHypeBox] = useState(false)
+
+    //for the hype setter modal
+    const hypeBoxOff = () => { setHypeBox(false) }
+    const setCardOff = () => { setCard(false) }
 
     //fetchCover grabs the box art url to be displayed in the card
     const fetchCover = (id) => {
@@ -57,8 +42,6 @@ const GameSearchDisplay = (props) => {
                 setCoverUrl(coverData[0].url);
             }).catch(err => console.log(err))
     }
-
-    
 
     //fetchRatings grabs the rating integer
     const fetchRatings = (ratingId) => {
@@ -113,12 +96,12 @@ const GameSearchDisplay = (props) => {
 
 
 
+    // const hypeToChange = (hype) => {setHypeRating(hype)}
 
 
-
-    
+    //just checking the props---temporary
     const checkProps = () => {
-        console.log('SEARCH PROPS', props)
+        console.log('GameSearchDisplay', props)
     }
 
     //this sets the rating 
@@ -142,11 +125,12 @@ const GameSearchDisplay = (props) => {
         }
     }
 
+    //this fires the secondary search fetchs 
     useEffect(() => {
-        if(props.searchGame.cover){
+        if (props.searchGame.cover) {
             fetchCover(props.searchGame.cover)
         }
-        if(props.searchGame.age_ratings){
+        if (props.searchGame.age_ratings) {
             fetchRatings(props.searchGame.age_ratings[0])
         }
 
@@ -155,33 +139,44 @@ const GameSearchDisplay = (props) => {
         //     fetchPlatforms(plats)
         // }
         //-------------------------------------------------------------------------------
-        
-    }, [])
-    
+
+    }, []) // the empty array keeps it from looping more than once
+
+    let count = timeConverter(props.searchGame.first_release_date)
+    console.log(count)
+
+
+
     return (
-        <>
-        {checkProps()}
-            <hr />
-                <Col sm='4'>
-                    <Card>
-                        <CardImg top width='100%' src={coverUrl} alt='Card image cap' />
-                        <CardBody>
-                            <CardTitle>{props.searchGame.name}</CardTitle>
-                            <CardSubtitle>
-                                {props.searchGame.first_release_date ? 
-                                    timeConverter(props.searchGame.first_release_date) :
-                                    ''}
-                            </CardSubtitle>
-                            <CardSubtitle>{handleRating()}</CardSubtitle>
 
-                            {/* <CardSubtitle>{plats}</CardSubtitle> */}
+        <div className='card-wrapper'>
+            {props.searchGame.cover && card ? <Card>
+                <CardImg className='card-img' src={coverUrl} alt='Card image cap' />
+                <CardBody className='card-body'>
+                    <CardTitle>{props.searchGame.name}</CardTitle>
+                    {props.searchGame.first_release_date ? <CardSubtitle>Release Date:</CardSubtitle> : null}
+                    <div className='release-date'>
+                        <CardSubtitle>
+                            {props.searchGame.first_release_date ?
+                                timeConverter(props.searchGame.first_release_date) :
+                                ''}
+                        </CardSubtitle>
+                        <CardSubtitle>
+                            Countdown timer should appear here
+                           {/* {countDown(count)} */}
+                        </CardSubtitle>
+                    </div>
+                    <CardSubtitle>{handleRating()}</CardSubtitle>
 
-                            <CardText className='description'>{props.searchGame.summary ? props.searchGame.summary : ''}</CardText>
-                        </CardBody>
-                        <Button color='success' onClick={() => handleSubmit()}>Add</Button>
-                    </Card>
-                </Col>
-        </>
+                    {/* <CardSubtitle>{plats}</CardSubtitle> */}
+
+                    <CardText className='description'>{props.searchGame.summary ? props.searchGame.summary : ''}</CardText>
+                </CardBody>
+                <Button color='success' onClick={() => setHypeBox(true)}>Add</Button>
+            </Card> : null}
+            {hypeBox ? <SearchHype token={props.token} setCardOff={setCardOff} hypeBoxOff={hypeBoxOff} searchGame={props.searchGame} /> : null}
+        </div>
+
     )
 }
 

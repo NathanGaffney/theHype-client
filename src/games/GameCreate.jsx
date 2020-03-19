@@ -60,7 +60,7 @@ const GameCreate = (props) => {
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor='description' />
-                            <Input placeholder='Description' type='textarea rows="2" cols="20" wrap="hard"' name='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <Input placeholder='Description'  type='textarea' rows='4' name='description' value={description} onChange={(e) => setDescription(e.target.value)} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor='releaseDate' />

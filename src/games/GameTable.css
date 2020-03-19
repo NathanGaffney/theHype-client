@@ -1,12 +1,36 @@
+/*this div wraps the table for scrolling*/
 .table-wrapper {
+    /* padding: 4em; */
     border-radius: 3px 3px 3px 3px;
     height: 75vh;
+    width: auto;
     overflow-wrap: break-word;
-    overflow: auto;
+    overflow-y: auto;
+    justify-content: center;
 }
 
-.desc-wrap{
+/* .table-backdrop{
+    border-radius: 3px 3px 3px 3px;
+    background-color: lightblue;
+    height: 60vh;
+    width: 80vw;
+
+} */
+
+td{
+    /*max-width changes the cell width!!!!!!!!!*/
+    max-width: 9em;
     overflow-wrap: break-word;
-    /* overflow: auto; */
-    overflow: auto;
+    
+}
+
+.td-buttons{
+    /*max-width changes the cell width!!!!!!!!!*/
+    max-width: 10em;
+    overflow-wrap: break-word;
+    
+}
+
+.Button{
+    margin-right: 5px;
 }
