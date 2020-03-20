@@ -214,9 +214,9 @@ const GameTable = (props) => {
             {/* <h3>{props.header ? 'Watch List' : 'Community'}</h3> */}
 
             {/*CommunityHype takes the newly mapped communtiy games and send them here to have you edit the hype on the modal and save them to your list*/}
-            {comHypeBox ? <CommunityHype token={props.token} hypeToBeChanged={hypeToBeChanged} comHypeBoxOff={comHypeBoxOff} /> : null}
 
             {countBox ? <CountDownTimer dateForCount={dateForCount} countBoxOff={countBoxOff} /> : null}
+            {comHypeBox ? <CommunityHype token={props.token} hypeToBeChanged={hypeToBeChanged} comHypeBoxOff={comHypeBoxOff} /> : null}
 
             <div className='table-wrapper'>
                 <Table dark striped hover>
