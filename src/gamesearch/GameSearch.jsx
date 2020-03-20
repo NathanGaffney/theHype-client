@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
     Label, Input, Container, Row, Col, Button,
-    Modal, ModalHeader, ModalBody
+    Modal, ModalHeader, ModalBody, Form, FormGroup
 } from 'reactstrap';
 import GameSearchDisplay from './GameSearchDisplay';
+import SearchIcon from '@material-ui/icons/Search';
 
 const GameSearch = (props) => {
     const [searchGame, setSearchGame] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
-    
-
-
-    //closes the search modal
-    const closeSearchBox = () => { props.searchBoxOff() }
-    const openSearchBox = () => { props.searchBoxOn() }
-
 
     //fetchSearch grabs the game to be placed in the card
     const fetchSearch = () => {
@@ -29,7 +23,7 @@ const GameSearch = (props) => {
             .then((searchData) => {
                 console.log('searchData', searchData)
                 setSearchGame(searchData)
-                closeSearchBox()
+                props.searchBoxOff()
             }).catch(err => console.log(err))
     }
 
@@ -39,7 +33,7 @@ const GameSearch = (props) => {
         cards = searchGame.map((item, index) => {
             //this item.cover will further filter our data to only map and send to fetch the cover if there is one to save on 3rd party api fetches and also help save on memory
             if (item.cover) {
-                return <GameSearchDisplay token={props.token} key={`game-card-${index}`} search={props.search} setSearch={props.setSearch} closeSearchBox={closeSearchBox()} searchGame={item} setSearchGame={setSearchGame} />
+                return <GameSearchDisplay token={props.token} key={`game-card-${index}`} search={props.search} setSearch={props.setSearch} searchGame={item} setSearchGame={setSearchGame} />
             }
         });
     }
@@ -47,21 +41,21 @@ const GameSearch = (props) => {
     return (
         <>
             {/* <Row><h3>Search</h3></Row> */}
-            
-            {props.searchBox ? <Modal isOpen={true}>
-                <ModalHeader toggle={() => props.searchBoxOff()}>What Game are you looking for?</ModalHeader>
-                <ModalBody>
-                    <Row>
-                        <Col md='8'>
-                            <h3><span>Enter Game Title</span></h3>
-                            <Label htmlFor='title' />
-                            <Input placeholder='Game Title' name='title' value={searchTitle} onChange={(e) => setSearchTitle(e.target.value)} />
-                        </Col>
-                    </Row>
-                    <br />
-                    <Button onClick={fetchSearch} >Search</Button>
-                </ModalBody>
-            </Modal> : null}
+
+            {props.searchBox ?
+                <Modal isOpen={true}>
+                    <ModalHeader toggle={() => props.searchBoxOff()}>What Game are you looking for?</ModalHeader>
+                    <ModalBody>
+                        <Form>
+                            <FormGroup>
+                                <h3><span>Enter Game Title</span></h3>
+                                <Label htmlFor='title' />
+                                <Input placeholder='Game Title' name='title' value={searchTitle} onChange={(e) => setSearchTitle(e.target.value)} />
+                            </FormGroup>
+                            <Button onClick={fetchSearch} >Search</Button>
+                        </Form>
+                    </ModalBody>
+                </Modal> : null}
             {cards}
         </>
     )

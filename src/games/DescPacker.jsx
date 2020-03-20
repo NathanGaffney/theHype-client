@@ -7,12 +7,17 @@ const DescPacker = (props) => {
     return (
         <>
             <Modal isOpen={true}>
-    <ModalHeader toggle={() => props.descOff()}>{props.titleToPack}</ModalHeader>
+                <ModalHeader toggle={() => props.descOff()}>{props.titleToPack}</ModalHeader>
                 <ModalBody>
+
                     <Row>
-                        <Col>
-                        <h4>Description:</h4>
+                        <Col sm='3'>
+                            <img src={props.urlToPack} />
+                        </Col>
+                        <Col sm='9'>
+                            <h4>Description:</h4>
                             <p>{props.descToPack}</p>
+
                         </Col>
                     </Row>
                 </ModalBody>

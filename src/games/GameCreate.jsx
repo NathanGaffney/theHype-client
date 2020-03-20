@@ -4,7 +4,7 @@ import APIURL from '../helpers/environment';
 
 const GameCreate = (props) => {
     const [title, setTitle] = useState('');
-    const [hypeRating, setHypeRating] = useState(0);
+    const [hypeRating, setHypeRating] = useState('');
     const [description, setDescription] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
     const [platform, setPlatform] = useState('');
@@ -12,6 +12,7 @@ const GameCreate = (props) => {
     // this creates a manual entry game for the user
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (title && hypeRating && description && releaseDate && platform) {
         fetch(`${APIURL}/game/create`, {
             method: 'POST',
             body: JSON.stringify({ title: title, hypeRating: hypeRating, description: description, releaseDate: releaseDate, platform: platform }),
@@ -30,6 +31,9 @@ const GameCreate = (props) => {
                 props.fetchGames();
                 props.createBoxOff();
             })
+        } else {
+            alert('Fill Out All Fields')
+        }
     }
 
     // this turns the custon create modal off
@@ -51,16 +55,16 @@ const GameCreate = (props) => {
                             <Label htmlFor='hypeRating' />
                             <Input type='select' name='hypeRating' value={hypeRating} onChange={(e) => setHypeRating(e.target.value)}>
                                 <option placeholder='How Hyped Are You'>How Hyped Are You</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
+                                <option value='1 - Meh..'>1 - Meh..</option>
+                                <option value='2 - Okay'>2 - Okay</option>
+                                <option value='3 - Looks fun'>3 - Looks fun</option>
+                                <option value="4 - Can't wait">4 - Can't wait</option>
+                                <option value='5 - LETS GOOOO'>5 - LETS GOOOO</option>
                             </Input>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor='description' />
-                            <Input placeholder='Description'  type='textarea' rows='4' name='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <Input placeholder='Description' type='textarea' rows='4' name='description' value={description} onChange={(e) => setDescription(e.target.value)} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor='releaseDate' />

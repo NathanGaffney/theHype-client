@@ -1,0 +1,66 @@
+.auth-container{
+    /* background-image: url("../assets/ps4controller.jpg"); */
+    background-position: center;
+    background-color: transparent;
+    border-radius: 3px;
+    margin: 0em 0 0 0;
+    padding: 2em;
+    width: 100%;
+    height: 35em;
+    /* box-shadow: grey 0 3px 15px 0.5px; */
+    /* background-image: url("../assets/gamers.jpg"); */
+    background-position: center;
+    background-size: cover;
+    
+}
+
+.welcome{
+    margin-top: .5em;
+    font-size: 4em;
+    color: #fe7121;
+}
+
+.wrapper{
+    background-image: url("../assets/ds.jpg");
+    /* background-image: url("../assets/train.jpg"); */
+    /* background-image: url("../assets/striped.jpg"); */
+    background-size: cover;
+    background-color: rgb(224, 224, 224);
+    height: 100vh;
+    width: 100vw;
+    padding-top: 4em;
+    /* background-image: url("../assets/gamingstadium.jpg"); */
+    background-position: center;
+}
+
+.login-banner{
+    background-color: white;
+    background: center;
+    margin-left: 5em;
+    width: 90vw;
+    border-radius: 3px;
+}
+
+/*for guidence while styling login*/
+/* .auth-pic-guide{
+    background-color: black;
+    height: 20em;
+    width: 40em;
+} */
+
+/* .login-pic{
+    box-shadow: grey 0 3px 15px 0.5px;
+} */
+
+
+.login-signup{
+    background-color: #e3e7f2;
+    padding: 1em;
+    max-width: 32em;
+    border-radius: 3px;
+    border-color: #fab492;
+    border-style: solid;
+    border-width: 3px;
+    box-shadow: grey 0 3px 15px 0.5px;
+    color: #fe7121;
+}

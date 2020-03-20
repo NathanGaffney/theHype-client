@@ -8,6 +8,8 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (username && password) {
         fetch(`${APIURL}/user/login`, {
             method: 'POST',
             body: JSON.stringify({ username: username, password: password }),
@@ -17,23 +19,25 @@ const Login = (props) => {
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.sessionToken);
+           data.sessionToken ? props.updateToken(data.sessionToken)
+           : alert(`${data.error}: Username or Password Not Found`)
         })
+    } else { alert('Please Fill Out All Fields')}
     }
 
     return (
-        <div>
+        <div className='login-signup'>
             <h1>Login</h1>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor='username'>Username</Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name='username' value={username} />
+                    <Label htmlFor='username'></Label>
+                    <Input placeholder='Username' onChange={(e) => setUsername(e.target.value)} name='username' value={username} />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor='password'>Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} type='password' name='password' value={password} />
+                    <Label htmlFor='password'></Label>
+                    <Input placeholder='Password' onChange={(e) => setPassword(e.target.value)} type='password' name='password' value={password} />
                 </FormGroup>
-                <Button type='submit'>Login</Button>
+                <Button color='info' type='submit'>Login</Button>
                 
             </Form>
         </div>

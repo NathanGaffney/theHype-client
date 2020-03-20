@@ -9,7 +9,6 @@ import { timeConverter } from './TimeConversion';
 import { countDown } from './TimeConversion';
 import SearchHype from './SearchHype';
 
-
 const GameSearchDisplay = (props) => {
     // const [title, setTitle] = useState(props.searchGame[0].name);
     const [hypeRating, setHypeRating] = useState(0);
@@ -59,14 +58,6 @@ const GameSearchDisplay = (props) => {
             }).catch(err => console.log(err))
     }
 
-
-
-
-
-
-
-
-
     //this isnt complete---------------------------------------------------------------
     // const fetchPlatforms = (id) => {
     //     fetch('https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/platforms', {
@@ -91,18 +82,10 @@ const GameSearchDisplay = (props) => {
     // }
     //--------------------------------------------------------------------------------
 
-
-
-
-
-
-    // const hypeToChange = (hype) => {setHypeRating(hype)}
-
-
     //just checking the props---temporary
-    const checkProps = () => {
-        console.log('GameSearchDisplay', props)
-    }
+    // const checkProps = () => {
+    //     console.log('GameSearchDisplay', props)
+    // }
 
     //this sets the rating 
     const handleRating = () => {
@@ -142,11 +125,6 @@ const GameSearchDisplay = (props) => {
 
     }, []) // the empty array keeps it from looping more than once
 
-    let count = timeConverter(props.searchGame.first_release_date)
-    console.log(count)
-
-
-
     return (
 
         <div className='card-wrapper'>
@@ -161,20 +139,13 @@ const GameSearchDisplay = (props) => {
                                 timeConverter(props.searchGame.first_release_date) :
                                 ''}
                         </CardSubtitle>
-                        <CardSubtitle>
-                            Countdown timer should appear here
-                           {/* {countDown(count)} */}
-                        </CardSubtitle>
                     </div>
                     <CardSubtitle>{handleRating()}</CardSubtitle>
-
-                    {/* <CardSubtitle>{plats}</CardSubtitle> */}
-
                     <CardText className='description'>{props.searchGame.summary ? props.searchGame.summary : ''}</CardText>
                 </CardBody>
                 <Button color='success' onClick={() => setHypeBox(true)}>Add</Button>
             </Card> : null}
-            {hypeBox ? <SearchHype token={props.token} setCardOff={setCardOff} hypeBoxOff={hypeBoxOff} searchGame={props.searchGame} /> : null}
+            {hypeBox ? <SearchHype token={props.token} coverUrl={coverUrl} setCardOff={setCardOff} hypeBoxOff={hypeBoxOff} searchGame={props.searchGame} /> : null}
         </div>
 
     )

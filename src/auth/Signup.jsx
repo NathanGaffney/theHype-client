@@ -8,7 +8,7 @@ const Signup = (props) => {
 
     let handleSubmit = (event) => {
         event.preventDefault();
-        if (username && password) {
+        if (username.length >= 5 && password.length >= 5) {
             fetch(`${APIURL}/user/signup`, {
                 method: 'Post',
                 body: JSON.stringify({ username: username, password: password}),
@@ -20,24 +20,27 @@ const Signup = (props) => {
             ).then((data) => {
                 props.updateToken(data.sessionToken)
             })
+        } else if (username.length < 5 && password.length < 5) {
+            alert('Username and Password Must Be At Least 5 Characters')
         } else {
             alert('Please Fill Out All Fields')
         }
+        
     }
 
     return (
-        <div>
+        <div className='login-signup'>
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor='username'>Username</Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name='username' value={username} />
+                    <Label htmlFor='username'></Label>
+                    <Input placeholder='Username (Must be at least 5 characters)' onChange={(e) => setUsername(e.target.value)} name='username' value={username} />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor='password'>Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} type='password' name='password' value={password} />
+                    <Label htmlFor='password'></Label>
+                    <Input placeholder='Password (Must be at least 5 characters)' onChange={(e) => setPassword(e.target.value)} type='password' name='password' value={password} />
                 </FormGroup>
-                <Button type='submit'>Signup</Button>
+                <Button color='info' type='submit'>Signup</Button>
             </Form>
         </div>
     )

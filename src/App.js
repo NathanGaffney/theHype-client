@@ -29,13 +29,13 @@ function App() {
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <Router><GameIndex token={sessionToken} /></Router> : <Auth updateToken={updateToken} />)
+    return (sessionToken === localStorage.getItem('token') ? <GameIndex clickLogout={clearToken} token={sessionToken} /> : <Auth updateToken={updateToken} />)
   }
 
   return (
     <div>
-      {sessionToken ? <Sitebar clickLogout={clearToken} /> : null}
       {protectedViews()}
+      
     </div>
 
   );
